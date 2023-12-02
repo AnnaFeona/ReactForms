@@ -1,0 +1,26 @@
+@use '../../styles/mixins' as mx;
+@use '../../styles/vars' as v;
+
+.home__container {
+  @include mx.flex-center;
+  width: 100%;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3rem;
+
+  .home__link {
+    @include mx.flex-center;
+    width: calc(50% - 2rem);
+    min-width: 220px;
+    padding: 1rem;
+
+    border: 1px solid #61dafbaa;
+    border-radius: 2rem;
+
+    &:hover {
+      background-color: v.$active-link;
+    }
+  }
+
+}

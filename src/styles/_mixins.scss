@@ -1,0 +1,11 @@
+@mixin wrapper($wid) {
+  display: flex;
+  width: $wid;
+  margin: 0 auto;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
