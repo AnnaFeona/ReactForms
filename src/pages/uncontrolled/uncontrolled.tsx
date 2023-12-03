@@ -3,6 +3,8 @@ import { FormField } from "../../components/formField/formField";
 import { Button } from "../../components/button/button";
 import { userScema } from "../../validation/user.validation";
 import { ValidationError } from "yup";
+import { FormFieldCheckbox } from "../../components/formFieldCheckbox/formFieldCheckbox";
+import { FormfieldRadio } from "../../components/formFieldRadio/formFieldRadio";
 
 export const Uncontrolled: FC = () => {
   const formDataRef = useRef({
@@ -33,6 +35,7 @@ export const Uncontrolled: FC = () => {
       ...formDataRef.current,
       [id]: inputValue,
     };
+    console.log(value, checked, inputValue);
   };
 
   const createTile = async (event: FormEvent) => {
@@ -45,15 +48,14 @@ export const Uncontrolled: FC = () => {
       })
       .catch((errors: ValidationError) => {
         const newFormErrors: Record<string, string> = {};
-        console.log(errors.inner);
 
         errors.inner.forEach((err) => {
           if (!newFormErrors[err.path as string]) {
             newFormErrors[err.path as string] = err.message;
-            console.log(err.path, err.message);
           }
         });
         setErrs(newFormErrors);
+        console.log(newFormErrors, formDataRef.current);
       });
   };
 
@@ -103,13 +105,12 @@ export const Uncontrolled: FC = () => {
           required
           errors={errs}
         />
-        {/* <FormField
+        <FormfieldRadio
           title="Gender:"
           id="gender"
-          type="radio"
           required
           errors={errs}
-        /> */}
+        />
         <FormField title="Country:" id="country" required errors={errs} />
         <FormField
           title="Image:"
@@ -118,13 +119,12 @@ export const Uncontrolled: FC = () => {
           required
           errors={errs}
         />
-        {/* <FormField
-          title="Accept T&C"
-          id="terms"
-          type="checkbox"
+        <FormFieldCheckbox
+          title="accept"
+          id="acceptTerms"
           required
           errors={errs}
-        /> */}
+        />
 
         <Button type="submit" title="Submit" />
       </form>

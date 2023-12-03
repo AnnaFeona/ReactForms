@@ -1,11 +1,10 @@
 import { FC, useEffect, useState } from "react";
 
-import "./formField.scss";
+import "./formFieldCheckbox.scss";
 import { FormFieldProps } from "../../model";
 
-export const FormField: FC<FormFieldProps> = ({
+export const FormFieldCheckbox: FC<FormFieldProps> = ({
   title,
-  type = "text",
   name,
   id,
   value,
@@ -22,15 +21,19 @@ export const FormField: FC<FormFieldProps> = ({
   return (
     <>
       <div className="formField">
-        <label htmlFor={id}>{title}</label>
+        <legend>Accept terms & conditions</legend>
+        <div className="input__container">
         <input
           form={form}
-          type={type}
+          type="checkbox"
           id={id}
           name={name}
           value={value}
           required={required}
         />
+        <label htmlFor={id}>{title}</label>
+        </div>
+
         <div className="error__message">
           {err && <span>{err}</span>}
         </div>
