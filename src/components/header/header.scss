@@ -8,6 +8,8 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10;
+  background-color: #292929;
 
   .nav__link.active {
     color: #61dafbaa;

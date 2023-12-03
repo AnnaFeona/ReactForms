@@ -11,7 +11,8 @@ export const FormField: FC<FormFieldProps> = ({
   value,
   errors,
   form,
-  required
+  required,
+  placeholder
 }) => {
   const [err, setErr] = useState("");
   useEffect(() => {
@@ -24,16 +25,16 @@ export const FormField: FC<FormFieldProps> = ({
       <div className="formField">
         <label htmlFor={id}>{title}</label>
         <input
+          className="formField__input"
           form={form}
           type={type}
           id={id}
           name={name}
           value={value}
           required={required}
+          placeholder={placeholder}
         />
-        <div className="error__message">
-          {err && <span>{err}</span>}
-        </div>
+        <div className="error__message">{err && <span>{err}</span>}</div>
       </div>
     </>
   );

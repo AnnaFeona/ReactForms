@@ -1,3 +1,5 @@
+@use './vars' as v;
+
 @mixin wrapper($wid) {
   display: flex;
   width: $wid;
@@ -8,4 +10,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@mixin focus-ring {
+  border-color: rgb(165 180 252);
+  outline: 2px solid v.$active-input;;
 }

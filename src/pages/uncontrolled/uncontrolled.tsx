@@ -75,6 +75,7 @@ export const Uncontrolled: FC = () => {
           required
           errors={errs}
           form="uncontrolled"
+          placeholder="ex. John"
         />
         <FormField
           title="Age:"
@@ -126,7 +127,7 @@ export const Uncontrolled: FC = () => {
           errors={errs}
         />
 
-        <Button type="submit" title="Submit" />
+        <Button type="submit" title="Submit" className="submit__btn"/>
       </form>
     </>
   );

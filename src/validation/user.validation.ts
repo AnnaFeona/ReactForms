@@ -45,7 +45,7 @@ export const userScema = yup.object().shape({
     .string()
     .required("Confirm Password is required")
     .oneOf([yup.ref("password")], "Passwords must match"),
-  // gender: yup.string().required("Gender is required"),
+  gender: yup.string().required("Gender is required"),
   acceptTerms: yup
     .boolean()
     .oneOf([true], "Please accept the terms and conditions"),

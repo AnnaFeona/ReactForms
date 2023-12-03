@@ -10,7 +10,7 @@ export const FormFieldCheckbox: FC<FormFieldProps> = ({
   value,
   errors,
   form,
-  required
+  required,
 }) => {
   const [err, setErr] = useState("");
   useEffect(() => {
@@ -23,20 +23,20 @@ export const FormFieldCheckbox: FC<FormFieldProps> = ({
       <div className="formField">
         <legend>Accept terms & conditions</legend>
         <div className="input__container">
-        <input
-          form={form}
-          type="checkbox"
-          id={id}
-          name={name}
-          value={value}
-          required={required}
-        />
-        <label htmlFor={id}>{title}</label>
+          <label htmlFor={id}>
+            <input
+              form={form}
+              type="checkbox"
+              id={id}
+              name={name}
+              value={value}
+              required={required}
+            />
+            {title}
+          </label>
         </div>
 
-        <div className="error__message">
-          {err && <span>{err}</span>}
-        </div>
+        <div className="error__message">{err && <span>{err}</span>}</div>
       </div>
     </>
   );

@@ -1,6 +1,8 @@
 import React, { FC, useEffect, useState } from "react";
 import { FormFieldProps, Gender } from "../../model";
 
+import './formFieldRadio.scss';
+
 export const FormfieldRadio: FC<FormFieldProps> = ({
   id,
   form,
@@ -24,7 +26,6 @@ export const FormfieldRadio: FC<FormFieldProps> = ({
               type="radio"
               value={Gender.male}
               form={form}
-              id={id}
               name={id}
               required={required}
             />
@@ -35,7 +36,6 @@ export const FormfieldRadio: FC<FormFieldProps> = ({
               type="radio"
               value={Gender.female}
               form={form}
-              id={id}
               name={id}
               required={required}
             />

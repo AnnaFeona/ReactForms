@@ -1,0 +1,31 @@
+@use '../../styles/mixins' as mx;
+@use '../../styles/vars' as v;
+
+.formField {
+  @include mx.wrapper(100%);
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    text-align: start;
+    font-size: 1.2rem;
+  }
+}
+
+.formField__input {
+  display: flex;
+  padding: 0.7rem;
+  border: v.$violet 1px solid;
+  border-radius: 0.7rem;
+
+  &:focus {
+    @include mx.focus-ring;
+  }
+}
+
+.error__message {
+  display: flex;
+  height: 1.2rem;
+  color: red;
+  font-size: 0.8rem;
+}
