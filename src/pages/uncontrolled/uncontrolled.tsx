@@ -9,6 +9,7 @@ import { FormFieldAutoComplete } from "../../components/formFieldAutoComplete/fo
 import { useAppDispatch } from "../../store/hooks";
 import { setUnControlled } from "../../store/slices/submits.slice";
 import { User } from "../../model";
+import { toBase64 } from "../../utils";
 
 export const Uncontrolled: FC = () => {
   const submit = useAppDispatch();
@@ -48,8 +49,12 @@ export const Uncontrolled: FC = () => {
 
     userScema
       .validate(formDataRef.current, { abortEarly: false })
-      .then(() => {
-        submit(setUnControlled(formDataRef.current));
+      .then(async () => {
+        const newImage = await toBase64(formDataRef.current.image as File);
+        console.log(newImage);
+        const submittedData = {...formDataRef.current};
+        submittedData.image = newImage as string;
+        submit(setUnControlled(submittedData));
 
         console.log("Form submitted:", formDataRef.current);
       })

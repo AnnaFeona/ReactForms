@@ -28,7 +28,7 @@ export interface User {
   password: string;
   passwordConfirm: string;
   country: string;
-  image: object | null;
+  image: File | string | null;
   acceptTerms: boolean;
 }
 
