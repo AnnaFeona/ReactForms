@@ -5,6 +5,7 @@ import { userScema } from "../../validation/user.validation";
 import { ValidationError } from "yup";
 import { FormFieldCheckbox } from "../../components/formFieldCheckbox/formFieldCheckbox";
 import { FormfieldRadio } from "../../components/formFieldRadio/formFieldRadio";
+import { FormFieldAutoComplete } from "../../components/formFieldAutoComplete/formFieldAutoComplete";
 
 export const Uncontrolled: FC = () => {
   const formDataRef = useRef({
@@ -106,13 +107,13 @@ export const Uncontrolled: FC = () => {
           required
           errors={errs}
         />
-        <FormfieldRadio
-          title="Gender:"
-          id="gender"
+        <FormfieldRadio title="Gender:" id="gender" required errors={errs} />
+        <FormFieldAutoComplete
+          title="Country:"
+          id="country"
           required
           errors={errs}
         />
-        <FormField title="Country:" id="country" required errors={errs} />
         <FormField
           title="Image:"
           id="image"
@@ -127,7 +128,7 @@ export const Uncontrolled: FC = () => {
           errors={errs}
         />
 
-        <Button type="submit" title="Submit" className="submit__btn"/>
+        <Button type="submit" title="Submit" className="submit__btn" />
       </form>
     </>
   );

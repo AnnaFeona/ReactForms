@@ -1,0 +1,46 @@
+@use '../../styles/vars' as v;
+
+.autocomplete__container {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  width: 100%;
+  min-height: 2rem;
+
+  top: 2rem;
+  border: 1px solid v.$active-input;
+  border-radius: 1rem;
+  background-color:  #282828;
+
+  padding: 0;
+  gap: 0.25rem;
+  list-style: none;
+  overflow: hidden;
+  z-index: 100;
+
+  li {
+    text-align: start;
+    margin: 0;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    text-decoration: none;
+
+    &:hover {
+      background-color: #444;
+      color: v.$active-link;
+      cursor: pointer;
+    }
+  }
+
+  .placeholder {
+    color: v.$primary-color;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+}

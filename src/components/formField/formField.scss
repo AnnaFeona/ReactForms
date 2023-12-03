@@ -17,6 +17,7 @@
   padding: 0.7rem;
   border: v.$violet 1px solid;
   border-radius: 0.7rem;
+  width: 100%;
 
   &:focus {
     @include mx.focus-ring;
