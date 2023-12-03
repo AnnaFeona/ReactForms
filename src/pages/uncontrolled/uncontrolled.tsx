@@ -6,15 +6,19 @@ import { ValidationError } from "yup";
 import { FormFieldCheckbox } from "../../components/formFieldCheckbox/formFieldCheckbox";
 import { FormfieldRadio } from "../../components/formFieldRadio/formFieldRadio";
 import { FormFieldAutoComplete } from "../../components/formFieldAutoComplete/formFieldAutoComplete";
+import { useAppDispatch } from "../../store/hooks";
+import { setUnControlled } from "../../store/slices/submits.slice";
+import { User } from "../../model";
 
 export const Uncontrolled: FC = () => {
-  const formDataRef = useRef({
+  const submit = useAppDispatch();
+  const formDataRef = useRef<User>({
     name: "",
-    age: "",
+    age: null,
     email: "",
     password: "",
     passwordConfirm: "",
-    gender: "",
+    gender: null,
     acceptTerms: false,
     image: null,
     country: "",
@@ -24,7 +28,7 @@ export const Uncontrolled: FC = () => {
   const formRef = useRef(null);
 
   const handleChange = (e: FormEvent) => {
-    const { id, value, type, checked, files } = e.target as HTMLInputElement;
+    const { name, value, type, checked, files } = e.target as HTMLInputElement;
     const inputValue =
       type === "checkbox"
         ? checked
@@ -34,9 +38,9 @@ export const Uncontrolled: FC = () => {
 
     formDataRef.current = {
       ...formDataRef.current,
-      [id]: inputValue,
+      [name]: inputValue,
     };
-    console.log(value, checked, inputValue);
+    console.log(formDataRef.current);
   };
 
   const createTile = async (event: FormEvent) => {
@@ -45,6 +49,8 @@ export const Uncontrolled: FC = () => {
     userScema
       .validate(formDataRef.current, { abortEarly: false })
       .then(() => {
+        submit(setUnControlled(formDataRef.current));
+
         console.log("Form submitted:", formDataRef.current);
       })
       .catch((errors: ValidationError) => {
@@ -56,8 +62,9 @@ export const Uncontrolled: FC = () => {
           }
         });
         setErrs(newFormErrors);
-        console.log(newFormErrors, formDataRef.current);
       });
+      // console.log(formDataRef.current);
+
   };
 
   return (
@@ -67,6 +74,8 @@ export const Uncontrolled: FC = () => {
         id="uncontrolled"
         onSubmit={createTile}
         onChange={handleChange}
+        onFocus={handleChange}
+        onPaste={handleChange}
         ref={formRef}
         noValidate
       >
@@ -113,6 +122,7 @@ export const Uncontrolled: FC = () => {
           id="country"
           required
           errors={errs}
+          form="uncontrolled"
         />
         <FormField
           title="Image:"

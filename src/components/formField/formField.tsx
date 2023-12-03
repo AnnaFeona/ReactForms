@@ -6,7 +6,6 @@ import { FormFieldProps } from "../../model";
 export const FormField: FC<FormFieldProps> = ({
   title,
   type = "text",
-  name,
   id,
   value,
   errors,
@@ -29,7 +28,7 @@ export const FormField: FC<FormFieldProps> = ({
           form={form}
           type={type}
           id={id}
-          name={name}
+          name={id}
           value={value}
           required={required}
           placeholder={placeholder}

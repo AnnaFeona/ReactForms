@@ -1,10 +1,9 @@
-import React, { ChangeEvent, FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import cn from "classnames";
 import { FormFieldProps } from "../../model";
 
 import "./formFieldAutoComplete.scss";
-
-const countries = ["England", "France", "Belarus"];
+import { useAppSelector } from "../../store/hooks";
 
 export const FormFieldAutoComplete: FC<FormFieldProps> = ({
   id,
@@ -17,6 +16,7 @@ export const FormFieldAutoComplete: FC<FormFieldProps> = ({
   const [filteredCountries, setFilteredCountries] = useState<string[]>([]);
   const [isVisible, setIsVisible] = useState(false);
   const [err, setErr] = useState("");
+  const countries = useAppSelector((state) => state.countries);
 
   useEffect(() => {
     if (errors) {
@@ -37,17 +37,16 @@ export const FormFieldAutoComplete: FC<FormFieldProps> = ({
   const handleSelectCountry = (country: string) => {
     setInputValue(country);
     setIsVisible(false);
-    // setFilteredCountries([]);
-    console.log(country);
+    console.log(country, inputValue);
   };
 
   const closeDropdown = () => {
     setIsVisible(false);
   };
 
-  const openDropdown = (countries: string[]) => {
-    setFilteredCountries(countries);
+  const openDropdown = (e: ChangeEvent, countries: string[]) => {
     setIsVisible(true);
+    setFilteredCountries(countries);
   };
 
   return (
@@ -63,17 +62,17 @@ export const FormFieldAutoComplete: FC<FormFieldProps> = ({
             value={inputValue}
             onChange={handleInputChange}
             onBlur={closeDropdown}
-            onFocus={() => openDropdown(countries)}
+            onFocus={(e) => openDropdown(e, countries)}
             formNoValidate
           />
           <ul
             className={cn("dropdown", { hidden: !isVisible })}
-            onClick={(e) => console.log(e.target)}
           >
             {!filteredCountries.length && <li className="placeholder">Not found</li>}
             {filteredCountries.map((country, index) => (
               <li
                 key={index}
+                value={country}
                 onClick={() => {
                   handleSelectCountry(country);
                 }}

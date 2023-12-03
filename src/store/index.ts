@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { submitsReducer } from './slices/submits.slice';
+import { countriesReducer } from './slices/countries.slice';
 
 
 export const store = configureStore({
   reducer: {
-    // pagination: paginationReducer,
-    // search: searchReducer,
-    // [beerApi.reducerPath]: beerApi.reducer,
+    submits: submitsReducer,
+    countries: countriesReducer,
   },
-  // middleware: (getDefaltMiddleware) => getDefaltMiddleware().concat(beerApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

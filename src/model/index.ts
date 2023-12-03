@@ -12,6 +12,7 @@ export interface FormFieldProps
   title: string;
   id: string;
   errors?: Record<string, string>;
+  setValue?: (value: string) => void;
 }
 
 export enum Gender {
@@ -21,12 +22,20 @@ export enum Gender {
 
 export interface User {
   name: string;
-  age: number;
+  age: number | null;
   email: string;
-  gender: Gender;
+  gender: Gender | null;
   password: string;
   passwordConfirm: string;
   country: string;
-  image: object;
-  terms: boolean;
+  image: object | null;
+  acceptTerms: boolean;
+}
+
+export interface FormSubmits {
+  uncontrolled: User[];
+  controlled: User[];
+  isControlledChanged: boolean;
+  isUnControlledChanged: boolean;
+
 }

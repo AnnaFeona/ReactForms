@@ -1,14 +1,14 @@
 import { RouterProvider } from 'react-router-dom';
 import './App.scss';
 import { router } from '../router';
-// import { Provider } from 'react-redux';
-// import { store } from '../store';
+import { Provider } from 'react-redux';
+import { store } from '../store';
 
 function App() {
   return (
-    // <Provider store={store}>
+    <Provider store={store}>
       <RouterProvider router={router} />
-    // </Provider>
+    </Provider>
   );
 }
 

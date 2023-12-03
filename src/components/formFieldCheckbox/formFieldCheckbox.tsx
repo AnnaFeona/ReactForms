@@ -5,7 +5,6 @@ import { FormFieldProps } from "../../model";
 
 export const FormFieldCheckbox: FC<FormFieldProps> = ({
   title,
-  name,
   id,
   value,
   errors,
@@ -28,7 +27,7 @@ export const FormFieldCheckbox: FC<FormFieldProps> = ({
               form={form}
               type="checkbox"
               id={id}
-              name={name}
+              name={id}
               value={value}
               required={required}
             />
