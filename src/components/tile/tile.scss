@@ -1,0 +1,16 @@
+@use '../../styles/vars' as v;
+
+.tile {
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  border: solid 1px v.$violet;
+  border-radius: 2rem;
+
+  &.active {
+    border: 3px v.$active-link solid;
+  }
+}
+.avatar {
+  border-radius: 2rem;
+}

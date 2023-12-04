@@ -3,16 +3,25 @@
 
 .home__container {
   @include mx.flex-center;
+  align-items: start;
   width: 100%;
-  justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 3rem;
 
-  .home__link {
-    @include mx.flex-center;
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
     width: calc(50% - 2rem);
     min-width: 220px;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .home__link {
+    @include mx.flex-center;
+    width: 100%;
     padding: 1rem;
 
     border: 1px solid #61dafbaa;
@@ -21,6 +30,12 @@
     &:hover {
       background-color: v.$active-link;
     }
+  }
+  .tiles__container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
   }
 
 }

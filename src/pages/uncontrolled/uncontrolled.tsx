@@ -113,7 +113,7 @@ export const Uncontrolled: FC = () => {
         />
         <FormField
           title="ConfirmPassword:"
-          id="confirmPassword"
+          id="passwordConfirm"
           type="password"
           required
           errors={errs}
