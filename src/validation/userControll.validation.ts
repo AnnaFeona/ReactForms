@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { Gender, UserControlled } from "../model";
 
-export const userScema = yup.object<UserControlled>().shape({
+export const userControllScema = yup.object<UserControlled>().shape({
   name: yup
     .string()
     .required("Name is required")
@@ -51,16 +51,17 @@ export const userScema = yup.object<UserControlled>().shape({
     .boolean()
     .oneOf([true], "Please accept the terms and conditions"),
   image: yup
-    .mixed<File>()
+    .mixed<FileList>()
+    .required()
     .test(
       "fileSize",
       "File size is too large (max 1 MB)",
-      (value) => value && value.size <= 1048576,
+      (value) => value[0] && value[0].size <= 1048576,
     )
     .test(
       "fileType",
       "Invalid file type. Please upload a PNG or JPEG file",
-      (value) => (value ? /\.(png|jpeg|jpg)$/.test(value.name) : true),
+      (value) => (value[0] ? /\.(png|jpeg|jpg)$/.test(value[0].name) : true),
     ),
   country: yup.string().required("Country is required"),
 });

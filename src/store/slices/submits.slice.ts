@@ -15,15 +15,11 @@ export const submitsSlice = createSlice({
   reducers: {
     setControlled: (state, action: PayloadAction<User>) => {
       state.controlled.push(action.payload);
-    },
-    setUnControlled: (state, action: PayloadAction<User>) => {
-      state.uncontrolled.push(action.payload);
-    },
-    setControlledChanged: (state) => {
       state.isControlledChanged = true;
       state.isUnControlledChanged = false;
     },
-    setUnControlledChanged: (state) => {
+    setUnControlled: (state, action: PayloadAction<User>) => {
+      state.uncontrolled.push(action.payload);
       state.isControlledChanged = false;
       state.isUnControlledChanged = true;
     },

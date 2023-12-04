@@ -10,8 +10,10 @@ import { useAppDispatch } from "../../store/hooks";
 import { setUnControlled } from "../../store/slices/submits.slice";
 import { User } from "../../model";
 import { toBase64 } from "../../utils";
+import { useNavigate } from "react-router-dom";
 
 export const Uncontrolled: FC = () => {
+  const navigate = useNavigate();
   const submit = useAppDispatch();
   const formDataRef = useRef<User>({
     name: "",
@@ -41,7 +43,6 @@ export const Uncontrolled: FC = () => {
       ...formDataRef.current,
       [name]: inputValue,
     };
-    console.log(formDataRef.current);
   };
 
   const createTile = async (event: FormEvent) => {
@@ -51,12 +52,11 @@ export const Uncontrolled: FC = () => {
       .validate(formDataRef.current, { abortEarly: false })
       .then(async () => {
         const newImage = await toBase64(formDataRef.current.image as File);
-        console.log(newImage);
         const submittedData = {...formDataRef.current};
         submittedData.image = newImage as string;
-        submit(setUnControlled(submittedData));
 
-        console.log("Form submitted:", formDataRef.current);
+        submit(setUnControlled(submittedData));
+        navigate('/');
       })
       .catch((errors: ValidationError) => {
         const newFormErrors: Record<string, string> = {};
@@ -68,7 +68,6 @@ export const Uncontrolled: FC = () => {
         });
         setErrs(newFormErrors);
       });
-      // console.log(formDataRef.current);
 
   };
 
@@ -79,8 +78,6 @@ export const Uncontrolled: FC = () => {
         id="uncontrolled"
         onSubmit={createTile}
         onChange={handleChange}
-        onFocus={handleChange}
-        onPaste={handleChange}
         ref={formRef}
         noValidate
       >

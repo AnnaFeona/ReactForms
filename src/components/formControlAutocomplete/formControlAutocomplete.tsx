@@ -1,32 +1,25 @@
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import cn from "classnames";
-import { FormFieldProps } from "../../model";
+import { FormControlProps } from "../../model";
 
-import "./formFieldAutoComplete.scss";
 import { useAppSelector } from "../../store/hooks";
 
-export const FormFieldAutoComplete: FC<FormFieldProps> = ({
+export const FormControlAutoComplete: FC<FormControlProps> = ({
   id,
   form,
   title,
   required,
   errors,
+  register,
+  setValue,
 }) => {
-  const [inputValue, setInputValue] = useState("");
   const [filteredCountries, setFilteredCountries] = useState<string[]>([]);
   const [isVisible, setIsVisible] = useState(false);
-  const [err, setErr] = useState("");
   const countries = useAppSelector((state) => state.countries);
-
-  useEffect(() => {
-    if (errors) {
-      setErr(errors[id]);
-    }
-  }, [errors, id, err]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setInputValue(value);
+    if (setValue) setValue(id, value);
 
     const filtered = countries.filter((country) =>
       country.toLowerCase().includes(value.toLowerCase()),
@@ -35,7 +28,7 @@ export const FormFieldAutoComplete: FC<FormFieldProps> = ({
   };
 
   const handleSelectCountry = (country: string) => {
-    setInputValue(country);
+    if (setValue) setValue(id, country);
     setIsVisible(false);
   };
 
@@ -56,18 +49,16 @@ export const FormFieldAutoComplete: FC<FormFieldProps> = ({
           <input
             className="formField__input"
             form={form}
-            name={id}
             required={required}
-            value={inputValue}
-            onChange={handleInputChange}
-            onBlur={closeDropdown}
             onFocus={(e) => openDropdown(e, countries)}
-            formNoValidate
+            {...register(id)}
+            onInput={handleInputChange}
+            onBlur={closeDropdown}
           />
-          <ul
-            className={cn("dropdown", { hidden: !isVisible })}
-          >
-            {!filteredCountries.length && <li className="placeholder">Not found</li>}
+          <ul className={cn("dropdown", { hidden: !isVisible })}>
+            {!filteredCountries.length && (
+              <li className="placeholder">Not found</li>
+            )}
             {filteredCountries.map((country, index) => (
               <li
                 key={index}
@@ -81,7 +72,9 @@ export const FormFieldAutoComplete: FC<FormFieldProps> = ({
             ))}
           </ul>
         </div>
-        <div className="error__message">{err && <span>{err}</span>}</div>
+        <div className="error__message">
+          {errors && errors[id] && <span>{errors[id]?.message}</span>}
+        </div>
       </div>
     </>
   );

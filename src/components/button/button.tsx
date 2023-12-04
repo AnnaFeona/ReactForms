@@ -7,10 +7,10 @@ export interface ButtonProps<T=unknown> extends HTMLProps<HTMLButtonElement>  {
   onButtonClick?: Callback<T>;
 }
 
-export const Button: FC<ButtonProps> = ({ title, className, onClick }) => {
+export const Button: FC<ButtonProps> = ({ title, className, onClick, disabled }) => {
   return (
     <>
-      <button className={className} onClick={onClick}>
+      <button className={className} onClick={onClick} disabled={disabled}>
         {title}
       </button>
     </>

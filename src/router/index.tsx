@@ -3,7 +3,7 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import { Controlled } from '../pages/hookForm/hookForm';
+import { Controlled } from '../pages/controlled/controlled';
 import { Uncontrolled } from '../pages/uncontrolled/uncontrolled';
 import { Layout } from '../pages/layout/layout';
 import { Home } from '../pages/home/home';
